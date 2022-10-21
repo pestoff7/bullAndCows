@@ -1,5 +1,7 @@
 package com.gmail.pestov.ilya;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Counter {
@@ -10,6 +12,18 @@ public class Counter {
   private int cows;
   private String userNumber;
   private String randomNumber;
+  private String answer;
+
+  public ArrayList<String> getAnswerArray() {
+    return answerArray;
+  }
+
+  public ArrayList<String> getUserNumberArray() {
+    return userNumberArray;
+  }
+
+  private ArrayList<String> answerArray = new ArrayList<>();
+  private ArrayList<String> userNumberArray = new ArrayList<>();
 
   public int getBulls() {
     return bulls;
@@ -31,7 +45,7 @@ public class Counter {
     return this.numberOfAttempts;
   }
 
-  public void countCowsAndBulls() {
+  public void countCowsAndBulls() throws IOException {
     String bullsOutString;
     String cowsOutString;
     this.bulls = 0;
@@ -41,6 +55,7 @@ public class Counter {
     char[] userNumberArray;
     this.randomNumber = generator.generateNumber();
     System.out.println(this.randomNumber);
+    Writer writer = new Writer();
     char[] randomNumberArray = this.randomNumber.toCharArray();
     while (true) {
       this.bulls = 0;
@@ -68,6 +83,7 @@ public class Counter {
       } else if (this.bulls == 1) {
         bullsOutString = "бык";
       }
+      this.answer = this.cows + " " + cowsOutString +  " " + this.bulls + " " + bullsOutString;
       System.out.println(this.cows + " " + cowsOutString +  " " + this.bulls + " " + bullsOutString);
       if (this.bulls == 4){
         break;
@@ -75,7 +91,10 @@ public class Counter {
       else {
         this.numberOfAttempts++;
       }
+      this.userNumberArray.add(userNumber);
+      this.answerArray.add(answer);
     }
+    writer.writeAnswer(this.userNumberArray, this.answerArray, this.randomNumber);
   }
 }
 
