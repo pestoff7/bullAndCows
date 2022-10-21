@@ -1,2 +1,2 @@
 # bullAndCows
-# USE JDK 17
+# USE JDK 17 \n DON'T DELETE "gameLog.txt" IT'S BROKE JAVA APPLICATION
